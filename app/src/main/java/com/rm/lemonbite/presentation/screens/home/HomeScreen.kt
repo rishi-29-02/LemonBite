@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -26,6 +27,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -144,15 +146,16 @@ fun HomeScreen(
             }
         }
 
-        Row(
-            modifier = Modifier.padding(dimensionResource(R.dimen.medium_small))
+        LazyRow(
+            modifier = Modifier.padding(dimensionResource(R.dimen.medium_small)),
+            horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.very_small))
         ) {
-            courses.forEach {
-                CourseChip(it, it in selectedCourse) { course ->
-                    if (course in selectedCourse) {
-                        homeScreenViewModel.removeFromSelected(course)
+            items(courses, key = { it }) { course ->
+                CourseChip(course, course in selectedCourse) {
+                    if (it in selectedCourse) {
+                        homeScreenViewModel.removeFromSelected(it)
                     } else {
-                        homeScreenViewModel.addToSelected(course)
+                        homeScreenViewModel.addToSelected(it)
                     }
                 }
             }
@@ -169,14 +172,16 @@ fun HomeScreen(
             }
 
             is UiState.Success -> {
-                fun key(name: String) = name.trim().lowercase().trimEnd('s')
+                val grouped = remember(menuUiState) {
+                    menuUiState.data.groupBy { name -> name.category.trim().lowercase().trimEnd('s') }
+                }
 
-                val grouped = menuUiState.data.groupBy { key(it.category) }
-
-                val sections: List<String> = when {
-                    courses.isEmpty() -> grouped.keys.toList()                 // nothing saved: show everything
-                    selectedCourse.isEmpty() -> courses
-                    else -> courses.filter { it in selectedCourse }            // keeps the normal order
+                val sections = remember(courses, selectedCourse, grouped) {
+                    when {
+                        courses.isEmpty() -> grouped.keys.toList()
+                        selectedCourse.isEmpty() -> courses
+                        else -> courses.filter { it in selectedCourse }
+                    }
                 }
 
                 LazyColumn(
@@ -188,7 +193,8 @@ fun HomeScreen(
                         )
                 ) {
                     sections.forEach { section ->
-                        val dishes = grouped[key(section)].orEmpty()
+                        val keyName = section.trim().lowercase().trimEnd('s')
+                        val dishes = grouped[keyName].orEmpty()
 
                         if (dishes.isNotEmpty()) {
                             item(key = "header_$section") {
@@ -204,7 +210,7 @@ fun HomeScreen(
                                 )
                             }
 
-                            items(dishes, key = { it.id }) { dish ->
+                            items(dishes, key = { it.id }, contentType = { MenuItem }) { dish ->
                                 CourseCard(dish) {
                                     onItemSelected(it)
                                 }

@@ -140,7 +140,7 @@ fun AppNavGraph(
                     }
                 },
                 navigateToProfileScreen = {
-                    navHostController.navigate(NavRoutes.TrackOrderScreen)
+                    navHostController.navigate(NavRoutes.ProfileScreen)
                 }
             )
         }
