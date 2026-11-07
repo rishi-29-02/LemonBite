@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">LemonBite</string>
+    <string name="welcome_to"> Welcome to</string>
+    <string name="get_started">Get Started</string>
+    <string name="next">Next</string>
+    <string name="chicago">Chicago</string>
+    <string name="search_menu_dishes_ingredients">Search menu, dishes or ingredients</string>
+</resources>
