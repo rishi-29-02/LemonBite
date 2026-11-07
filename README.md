@@ -21,9 +21,13 @@
 | :-: | :-: | :-: |
 | <img src="docs/screenshots/home_screen.png" width="250" alt="Home Screen" /> | <img src="docs/screenshots/dish_detail_screen.png" width="250" alt="Dish Details" /> | <img src="docs/screenshots/order_summary_screen.png" width="250" alt="Order Summary" /> |
 
-| Track Order | Profile Screen |
-| :-: | :-: |
-| <img src="docs/screenshots/track_order_screen.png" width="250" alt="Track Order" /> | <img src="docs/screenshots/profile_screen.png" width="250" alt="Profile Screen" /> |
+| Track Order | Profile Screen | SignUp Screen |
+| :-: | :-: | :-: |
+| <img src="docs/screenshots/track_order_screen.png" width="250" alt="Track Order" /> | <img src="docs/screenshots/profile_screen.png" width="250" alt="Profile Screen" /> | <img src="docs/screenshots/sign_up_screen.png" width="250" alt="Sign Up Screen" /> |
+
+| Preferences Screen |
+| :-: |
+| <img src="docs/screenshots/preferences_screen.png" width="250" alt="Preferences Screen" /> |
 
 ---
 
