@@ -15,6 +15,18 @@
 
 ---
 
+## 📸 App Screenshots
+
+| Home Screen | Dish Details | Order Summary |
+| :-: | :-: | :-: |
+| <img src="docs/screenshots/home_screen.png" width="250" alt="Home Screen" /> | <img src="docs/screenshots/dish_detail_screen.png" width="250" alt="Dish Details" /> | <img src="docs/screenshots/order_summary_screen.png" width="250" alt="Order Summary" /> |
+
+| Track Order | Profile Screen |
+| :-: | :-: |
+| <img src="docs/screenshots/track_order_screen.png" width="250" alt="Track Order" /> | <img src="docs/screenshots/profile_screen.png" width="250" alt="Profile Screen" /> |
+
+---
+
 ## 🛠️ Tech Stack & Architecture
 
 LemonBite is built following **Clean Architecture** principles and **MVVM (Model-View-ViewModel)** pattern, splitting code into modular layers: `presentation`, `domain`, and `data`.
