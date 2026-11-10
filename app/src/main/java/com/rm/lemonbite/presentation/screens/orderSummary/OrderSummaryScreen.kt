@@ -3,11 +3,9 @@ package com.rm.lemonbite.presentation.screens.orderSummary
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -51,7 +49,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
@@ -72,7 +69,7 @@ fun OrderSummaryScreen(
     orderSummaryViewModel: OrderSummaryViewModel = hiltViewModel(),
     navigateToTrackOrder: () -> Unit = {},
     onBackClick: () -> Unit = {},
-    navigateToProfileScreen: () -> Unit = {}
+    navigateToProfileScreen: () -> Unit = {},
 ) {
     val isCutlerySelected = remember { mutableStateOf(false) }
     var showSuccess by remember { mutableStateOf(false) }
@@ -83,45 +80,45 @@ fun OrderSummaryScreen(
     val menuItems = orderSummaryViewModel.manuItem.collectAsStateWithLifecycle().value
 
     Column(
-        modifier = modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize(),
     ) {
         TopMenuBar(
             showBackButton = true,
             onCartClicked = {
-
             },
             onProfileIconClick = {
                 navigateToProfileScreen()
             },
             onBackClick = {
                 onBackClick()
-            }
+            },
         )
 
         Column(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .padding(dimensionResource(R.dimen.medium))
                 .weight(1f)
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(rememberScrollState()),
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Row(
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Icon(
                         imageVector = Icons.Default.DeliveryDining,
                         contentDescription = "Dining Truck",
-                        tint = colorResource(R.color.green)
+                        tint = colorResource(R.color.green),
                     )
 
                     Text(
                         text = "Delivery time : 20 mins",
                         fontFamily = FontFamily.SansSerif,
-                        modifier = Modifier.padding(start = dimensionResource(R.dimen.small))
+                        modifier = Modifier.padding(start = dimensionResource(R.dimen.small)),
                     )
                 }
 
@@ -134,32 +131,33 @@ fun OrderSummaryScreen(
                 )
             }
 
-
             Box(
-                modifier = Modifier
+                modifier =
+                Modifier
                     .padding(vertical = dimensionResource(R.dimen.medium_large))
                     .clip(RoundedCornerShape(dimensionResource(R.dimen.small)))
                     .border(
                         1.dp,
                         colorResource(R.color.green),
-                        RoundedCornerShape(dimensionResource(R.dimen.small))
-                    )
+                        RoundedCornerShape(dimensionResource(R.dimen.small)),
+                    ),
             ) {
                 Row(
-                    modifier = Modifier
+                    modifier =
+                    Modifier
                         .fillMaxWidth()
                         .padding(dimensionResource(R.dimen.small)),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
+                    horizontalArrangement = Arrangement.Center,
                 ) {
                     Column(
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier.weight(1f),
                     ) {
                         Text(
                             text = "Cutlery",
                             fontFamily = FontFamily.Serif,
                             fontWeight = FontWeight.Bold,
-                            fontSize = dimensionResource(R.dimen.medium_large).value.sp
+                            fontSize = dimensionResource(R.dimen.medium_large).value.sp,
                         )
 
                         Text(
@@ -167,9 +165,10 @@ fun OrderSummaryScreen(
                             fontFamily = FontFamily.Serif,
                             color = colorResource(R.color.gray),
                             fontSize = dimensionResource(R.dimen.small).value.sp,
-                            modifier = Modifier.padding(
-                                top = dimensionResource(R.dimen.very_small)
-                            )
+                            modifier =
+                            Modifier.padding(
+                                top = dimensionResource(R.dimen.very_small),
+                            ),
                         )
                     }
 
@@ -178,10 +177,11 @@ fun OrderSummaryScreen(
                         onClick = {
                             isCutlerySelected.value = !isCutlerySelected.value
                         },
-                        colors = RadioButtonDefaults.colors(
+                        colors =
+                        RadioButtonDefaults.colors(
                             selectedColor = colorResource(R.color.green),
-                            unselectedColor = colorResource(R.color.green)
-                        )
+                            unselectedColor = colorResource(R.color.green),
+                        ),
                     )
                 }
             }
@@ -199,7 +199,7 @@ fun OrderSummaryScreen(
                 fontSize = dimensionResource(R.dimen.medium_large).value.sp,
                 fontFamily = FontFamily.Serif,
                 fontWeight = FontWeight.SemiBold,
-                modifier = Modifier.padding(top = dimensionResource(R.dimen.medium_small))
+                modifier = Modifier.padding(top = dimensionResource(R.dimen.medium_small)),
             )
 
             cartItems.forEach { cartItem ->
@@ -213,7 +213,7 @@ fun OrderSummaryScreen(
                     },
                     onRemoveItemClicked = {
                         orderSummaryViewModel.removeCartItem(cartItem)
-                    }
+                    },
                 )
             }
 
@@ -222,16 +222,16 @@ fun OrderSummaryScreen(
                 fontSize = dimensionResource(R.dimen.medium_large).value.sp,
                 fontFamily = FontFamily.Serif,
                 fontWeight = FontWeight.SemiBold,
-                modifier = Modifier.padding(vertical = dimensionResource(R.dimen.large))
+                modifier = Modifier.padding(vertical = dimensionResource(R.dimen.large)),
             )
 
-            LazyRow (
-                horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.small))
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.small)),
             ) {
                 items(
                     items = menuItems,
                     key = { it.id },
-                    contentType = { MenuItem }
+                    contentType = { MenuItem },
                 ) {
                     MoreItems(it)
                 }
@@ -244,20 +244,22 @@ fun OrderSummaryScreen(
                     showSuccess = true
                 }
             },
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxWidth()
                 .padding(dimensionResource(R.dimen.medium_large)),
             contentPadding = PaddingValues(dimensionResource(R.dimen.small)),
             shape = RoundedCornerShape(dimensionResource(R.dimen.very_small)),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = colorResource(R.color.yellow)
-            )
+            colors =
+            ButtonDefaults.buttonColors(
+                containerColor = colorResource(R.color.yellow),
+            ),
         ) {
             Text(
                 text = "Checkout - $$totalPrice",
                 fontSize = dimensionResource(R.dimen.medium).value.sp,
                 color = colorResource(R.color.green),
-                fontFamily = FontFamily.SansSerif
+                fontFamily = FontFamily.SansSerif,
             )
         }
 
@@ -270,45 +272,44 @@ fun OrderSummaryScreen(
 }
 
 @Composable
-fun AddOns(
-    name: String,
-    price: String
-) {
+fun AddOns(name: String, price: String) {
     Text(
         text = "+ $name ($$price)",
         fontWeight = FontWeight.SemiBold,
         color = colorResource(R.color.gray),
         fontSize = dimensionResource(R.dimen.medium_small).value.sp,
-        modifier = Modifier.padding(top = dimensionResource(R.dimen.very_small))
+        modifier = Modifier.padding(top = dimensionResource(R.dimen.very_small)),
     )
 }
 
 @Composable
 fun MoreItems(menuItem: MenuItem) {
     Box(
-        modifier = Modifier
+        modifier =
+        Modifier
             .width(180.dp)
             .clip(RoundedCornerShape(dimensionResource(R.dimen.small)))
             .border(
                 width = 1.dp,
                 color = colorResource(R.color.gray),
-                shape = RoundedCornerShape(dimensionResource(R.dimen.small))
-            )
-            .background(colorResource(R.color.white))
+                shape = RoundedCornerShape(dimensionResource(R.dimen.small)),
+            ).background(colorResource(R.color.white)),
     ) {
         Column(
-            modifier = Modifier.padding(
-                dimensionResource(R.dimen.small)
-            )
+            modifier =
+            Modifier.padding(
+                dimensionResource(R.dimen.small),
+            ),
         ) {
             AsyncImage(
                 model = menuItem.image,
                 contentDescription = "food_Icon",
                 contentScale = ContentScale.Crop,
-                modifier = Modifier
+                modifier =
+                Modifier
                     .width(150.dp)
                     .height(100.dp)
-                    .clip(RoundedCornerShape(dimensionResource(R.dimen.small)))
+                    .clip(RoundedCornerShape(dimensionResource(R.dimen.small))),
             )
 
             Column {
@@ -317,7 +318,7 @@ fun MoreItems(menuItem: MenuItem) {
                     fontSize = dimensionResource(R.dimen.medium).value.sp,
                     fontFamily = FontFamily.Serif,
                     fontWeight = FontWeight.SemiBold,
-                    modifier = Modifier.padding(top = dimensionResource(R.dimen.small))
+                    modifier = Modifier.padding(top = dimensionResource(R.dimen.small)),
                 )
 
                 Text(
@@ -328,35 +329,35 @@ fun MoreItems(menuItem: MenuItem) {
                     fontWeight = FontWeight.SemiBold,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.padding(top = dimensionResource(R.dimen.very_small))
+                    modifier = Modifier.padding(top = dimensionResource(R.dimen.very_small)),
                 )
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
                         text = "$${menuItem.price}",
                         fontSize = dimensionResource(R.dimen.medium_small).value.sp,
                         fontFamily = FontFamily.SansSerif,
                         color = colorResource(R.color.green),
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
                     )
 
                     Button(
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = colorResource(R.color.green)
+                        colors =
+                        ButtonDefaults.buttonColors(
+                            containerColor = colorResource(R.color.green),
                         ),
                         onClick = {
-
                         },
                     ) {
                         Text(
                             text = "+ Add",
                             fontFamily = FontFamily.SansSerif,
                             color = colorResource(R.color.yellow),
-                            fontWeight = FontWeight.Bold
+                            fontWeight = FontWeight.Bold,
                         )
                     }
                 }
@@ -373,41 +374,41 @@ fun SuccessPopUp(onFinished: () -> Unit = {}) {
     LaunchedEffect(Unit) {
         progress.animateTo(
             targetValue = 1f,
-            animationSpec = tween(durationMillis = 5000, easing = LinearEasing)
+            animationSpec = tween(durationMillis = 5000, easing = LinearEasing),
         )
         currentOnFinished()
     }
 
     Dialog(
         onDismissRequest = {
-
-        }
+        },
     ) {
         Column(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(dimensionResource(R.dimen.medium)))
-                .background(colorResource(R.color.white))
+                .background(colorResource(R.color.white)),
         ) {
             Column(
-                modifier = Modifier
+                modifier =
+                Modifier
                     .fillMaxWidth()
                     .padding(dimensionResource(R.dimen.large)),
-                horizontalAlignment = Alignment.CenterHorizontally
-
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-
                 Box(
-                    modifier = Modifier
+                    modifier =
+                    Modifier
                         .clip(CircleShape)
                         .background(colorResource(R.color.green))
-                        .padding(dimensionResource(R.dimen.very_small))
+                        .padding(dimensionResource(R.dimen.very_small)),
                 ) {
                     Icon(
                         imageVector = Icons.Default.Check,
                         contentDescription = "Remove",
                         modifier = Modifier.padding(dimensionResource(R.dimen.very_small)),
-                        tint = colorResource(R.color.white)
+                        tint = colorResource(R.color.white),
                     )
                 }
 
@@ -418,46 +419,52 @@ fun SuccessPopUp(onFinished: () -> Unit = {}) {
                     fontSize = dimensionResource(R.dimen.medium_large).value.sp,
                     fontFamily = FontFamily.Serif,
                     fontWeight = FontWeight.Bold,
-                    color = colorResource(R.color.green)
+                    color = colorResource(R.color.green),
                 )
 
                 Text(
                     text = "Your order will be with you shortly.",
                     fontSize = dimensionResource(R.dimen.medium_small).value.sp,
                     fontFamily = FontFamily.SansSerif,
-                    modifier = Modifier.padding(top = dimensionResource(R.dimen.small))
+                    modifier = Modifier.padding(top = dimensionResource(R.dimen.small)),
                 )
 
                 Spacer(modifier = Modifier.padding(top = dimensionResource(R.dimen.very_small)))
 
                 Box(
-                    modifier = Modifier
+                    modifier =
+                    Modifier
                         .clip(CircleShape)
                         .background(colorResource(R.color.light_gray))
-                        .padding(dimensionResource(R.dimen.very_small))
+                        .padding(dimensionResource(R.dimen.very_small)),
                 ) {
                     Text(
                         text = "Order ID: #12345",
                         fontSize = dimensionResource(R.dimen.medium_small).value.sp,
                         fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.very_small))
+                        modifier = Modifier.padding(
+                            horizontal = dimensionResource(R.dimen.very_small),
+                        ),
                     )
                 }
 
                 Box(
-                    modifier = Modifier
+                    modifier =
+                    Modifier
                         .padding(vertical = dimensionResource(R.dimen.small))
                         .clip(CircleShape)
                         .background(colorResource(R.color.orange))
-                        .padding(dimensionResource(R.dimen.very_small))
+                        .padding(dimensionResource(R.dimen.very_small)),
                 ) {
                     Text(
                         text = "Estimated Arrival: 20 mins",
                         fontSize = dimensionResource(R.dimen.medium_small).value.sp,
                         fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.very_small))
+                        modifier = Modifier.padding(
+                            horizontal = dimensionResource(R.dimen.very_small),
+                        ),
                     )
                 }
 
@@ -465,21 +472,23 @@ fun SuccessPopUp(onFinished: () -> Unit = {}) {
                     text = "Thank you for your business.",
                     fontSize = dimensionResource(R.dimen.medium_small).value.sp,
                     fontFamily = FontFamily.SansSerif,
-                    color = colorResource(R.color.green)
+                    color = colorResource(R.color.green),
                 )
             }
 
             Box(
-                modifier = Modifier
+                modifier =
+                Modifier
                     .fillMaxWidth()
                     .height(4.dp)
-                    .background(colorResource(R.color.light_gray))
+                    .background(colorResource(R.color.light_gray)),
             ) {
                 Box(
-                    modifier = Modifier
+                    modifier =
+                    Modifier
                         .fillMaxWidth(progress.value)
                         .fillMaxHeight()
-                        .background(colorResource(R.color.green))
+                        .background(colorResource(R.color.green)),
                 )
             }
         }
@@ -491,53 +500,61 @@ fun CartItem(
     cartItem: MenuItem,
     onCartItemRemoveClicked: (MenuItem) -> Unit,
     onCartItemAddClicked: (MenuItem) -> Unit,
-    onRemoveItemClicked: (MenuItem) -> Unit
+    onRemoveItemClicked: (MenuItem) -> Unit,
 ) {
     Box(
-        modifier = Modifier
+        modifier =
+        Modifier
             .padding(top = dimensionResource(R.dimen.very_small))
             .clip(RoundedCornerShape(dimensionResource(R.dimen.small)))
             .border(
                 1.dp,
                 colorResource(R.color.gray),
-                RoundedCornerShape(dimensionResource(R.dimen.small))
-            )
+                RoundedCornerShape(dimensionResource(R.dimen.small)),
+            ),
     ) {
         Row(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxWidth()
-                .padding(top = dimensionResource(R.dimen.small), start = dimensionResource(R.dimen.small), end = dimensionResource(R.dimen.small))
+                .padding(
+                    top = dimensionResource(R.dimen.small),
+                    start = dimensionResource(R.dimen.small),
+                    end = dimensionResource(R.dimen.small),
+                ),
         ) {
             AsyncImage(
                 model = cartItem.image,
                 contentDescription = "food_Icon",
                 contentScale = ContentScale.Crop,
-                modifier = Modifier
+                modifier =
+                Modifier
                     .size(80.dp)
-                    .clip(RoundedCornerShape(dimensionResource(R.dimen.small)))
+                    .clip(RoundedCornerShape(dimensionResource(R.dimen.small))),
             )
 
             Column(
-                modifier = Modifier
+                modifier =
+                Modifier
                     .weight(1f)
-                    .padding(start = dimensionResource(R.dimen.small))
+                    .padding(start = dimensionResource(R.dimen.small)),
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
                         text = "${cartItem.qtySelected} x ${cartItem.title}",
                         fontWeight = FontWeight.Bold,
-                        fontSize = dimensionResource(R.dimen.medium_small).value.sp
+                        fontSize = dimensionResource(R.dimen.medium_small).value.sp,
                     )
 
                     Text(
                         text = "$${cartItem.totalItemPrice}",
                         fontWeight = FontWeight.SemiBold,
                         color = colorResource(R.color.green),
-                        fontSize = dimensionResource(R.dimen.medium_small).value.sp
+                        fontSize = dimensionResource(R.dimen.medium_small).value.sp,
                     )
                 }
 
@@ -550,33 +567,34 @@ fun CartItem(
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Row(
-                        modifier = Modifier.padding(
-                            vertical = dimensionResource(R.dimen.very_small)
+                        modifier =
+                        Modifier.padding(
+                            vertical = dimensionResource(R.dimen.very_small),
                         ),
-                        verticalAlignment = Alignment.CenterVertically
+                        verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Box(
-                            modifier = Modifier
+                            modifier =
+                            Modifier
                                 .clip(CircleShape)
                                 .border(
                                     width = 1.dp,
                                     colorResource(R.color.gray),
-                                    shape = CircleShape
-                                )
-                                .background(colorResource(R.color.bright_gray))
+                                    shape = CircleShape,
+                                ).background(colorResource(R.color.bright_gray))
                                 .clickable(
                                     onClick = {
                                         if (cartItem.qtySelected > 1) {
                                             onCartItemRemoveClicked(cartItem)
                                         }
-                                    }
-                                )
+                                    },
+                                ),
                         ) {
                             Box(
-                                modifier = Modifier.padding(dimensionResource(R.dimen.very_small))
+                                modifier = Modifier.padding(dimensionResource(R.dimen.very_small)),
                             ) {
                                 Icon(
                                     imageVector = Icons.Default.Remove,
@@ -592,32 +610,34 @@ fun CartItem(
                             fontFamily = FontFamily.SansSerif,
                             fontWeight = FontWeight.Bold,
                             fontSize = dimensionResource(R.dimen.medium_large).value.sp,
-                            modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.medium_large))
+                            modifier = Modifier.padding(
+                                horizontal = dimensionResource(R.dimen.medium_large),
+                            ),
                         )
 
                         Box(
-                            modifier = Modifier
+                            modifier =
+                            Modifier
                                 .clip(CircleShape)
                                 .background(colorResource(R.color.green))
                                 .border(
                                     width = 1.dp,
                                     colorResource(R.color.green),
-                                    shape = CircleShape
-                                )
-                                .clickable(
+                                    shape = CircleShape,
+                                ).clickable(
                                     onClick = {
                                         onCartItemAddClicked(cartItem)
-                                    }
-                                )
+                                    },
+                                ),
                         ) {
                             Box(
-                                modifier = Modifier.padding(dimensionResource(R.dimen.very_small))
+                                modifier = Modifier.padding(dimensionResource(R.dimen.very_small)),
                             ) {
                                 Icon(
                                     imageVector = Icons.Default.Add,
                                     contentDescription = "Remove",
                                     modifier = Modifier.padding(1.dp),
-                                    tint = colorResource(R.color.white)
+                                    tint = colorResource(R.color.white),
                                 )
                             }
                         }
@@ -630,12 +650,14 @@ fun CartItem(
                         fontWeight = FontWeight.Bold,
                         textDecoration = TextDecoration.Underline,
                         color = colorResource(R.color.orange),
-                        modifier = Modifier.padding(end = dimensionResource(R.dimen.very_small))
+                        modifier =
+                        Modifier
+                            .padding(end = dimensionResource(R.dimen.very_small))
                             .clickable(
                                 onClick = {
                                     onRemoveItemClicked(cartItem)
-                                }
-                            )
+                                },
+                            ),
                     )
                 }
             }

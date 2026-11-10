@@ -3,7 +3,6 @@ package com.rm.lemonbite.presentation.navigation
 import kotlinx.serialization.Serializable
 
 sealed interface NavRoutes {
-
     @Serializable
     data object WelcomeScreen
 

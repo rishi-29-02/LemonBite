@@ -42,11 +42,12 @@ import com.rm.lemonbite.presentation.customComponents.TopMenuBar
 fun ProfileScreen(
     modifier: Modifier = Modifier,
     navigateToCartScreen: () -> Unit,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
 ) {
     Column(
-        modifier = modifier
-            .fillMaxSize()
+        modifier =
+        modifier
+            .fillMaxSize(),
     ) {
         TopMenuBar(
             showBackButton = true,
@@ -55,22 +56,22 @@ fun ProfileScreen(
             },
             onBackClick = {
                 onBackClick()
-            }
+            },
         )
 
         Column(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .weight(1f)
                 .padding(
-                    horizontal = dimensionResource(R.dimen.medium)
-                )
-                .verticalScroll(rememberScrollState())
+                    horizontal = dimensionResource(R.dimen.medium),
+                ).verticalScroll(rememberScrollState()),
         ) {
             Text(
                 text = "Personal Information",
                 fontFamily = FontFamily.Serif,
                 fontWeight = FontWeight.Bold,
-                fontSize = dimensionResource(R.dimen.medium_large).value.sp
+                fontSize = dimensionResource(R.dimen.medium_large).value.sp,
             )
 
             Spacer(modifier = Modifier.padding(vertical = dimensionResource(R.dimen.small)))
@@ -79,7 +80,7 @@ fun ProfileScreen(
                 text = "Avatar",
                 fontFamily = FontFamily.SansSerif,
                 color = colorResource(R.color.green),
-                fontSize = dimensionResource(R.dimen.medium).value.sp
+                fontSize = dimensionResource(R.dimen.medium).value.sp,
             )
 
             Spacer(modifier = Modifier.padding(top = dimensionResource(R.dimen.small)))
@@ -87,31 +88,33 @@ fun ProfileScreen(
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Box(
-                    modifier = Modifier
+                    modifier =
+                    Modifier
                         .wrapContentSize()
                         .clip(CircleShape)
                         .background(color = colorResource(R.color.green))
-                        .padding(dimensionResource(R.dimen.large))
+                        .padding(dimensionResource(R.dimen.large)),
                 ) {
                     Text(
                         text = "AV",
                         fontFamily = FontFamily.SansSerif,
                         color = colorResource(R.color.white),
                         fontWeight = FontWeight.Bold,
-                        fontSize = dimensionResource(R.dimen.large).value.sp
+                        fontSize = dimensionResource(R.dimen.large).value.sp,
                     )
                 }
 
                 Row {
                     Box(
-                        modifier = Modifier
+                        modifier =
+                        Modifier
                             .clip(RoundedCornerShape(dimensionResource(R.dimen.small)))
                             .background(
-                                colorResource(R.color.bright_gray)
-                            )
+                                colorResource(R.color.bright_gray),
+                            ),
                     ) {
                         Text(
                             text = "Change",
@@ -119,23 +122,25 @@ fun ProfileScreen(
                             color = colorResource(R.color.green),
                             fontWeight = FontWeight.SemiBold,
                             fontSize = dimensionResource(R.dimen.medium).value.sp,
-                            modifier = Modifier.padding(
+                            modifier =
+                            Modifier.padding(
                                 horizontal = dimensionResource(R.dimen.medium),
-                                vertical = dimensionResource(R.dimen.small)
-                            )
+                                vertical = dimensionResource(R.dimen.small),
+                            ),
                         )
                     }
 
                     Spacer(modifier = Modifier.padding(start = dimensionResource(R.dimen.small)))
 
                     Box(
-                        modifier = Modifier
+                        modifier =
+                        Modifier
                             .clip(RoundedCornerShape(dimensionResource(R.dimen.small)))
                             .border(
                                 width = 1.dp,
                                 colorResource(R.color.green),
-                                RoundedCornerShape(dimensionResource(R.dimen.small))
-                            )
+                                RoundedCornerShape(dimensionResource(R.dimen.small)),
+                            ),
                     ) {
                         Text(
                             text = "Remove",
@@ -143,10 +148,11 @@ fun ProfileScreen(
                             color = colorResource(R.color.gray),
                             fontWeight = FontWeight.SemiBold,
                             fontSize = dimensionResource(R.dimen.medium).value.sp,
-                            modifier = Modifier.padding(
+                            modifier =
+                            Modifier.padding(
                                 horizontal = dimensionResource(R.dimen.medium),
-                                vertical = dimensionResource(R.dimen.small)
-                            )
+                                vertical = dimensionResource(R.dimen.small),
+                            ),
                         )
                     }
                 }
@@ -159,7 +165,7 @@ fun ProfileScreen(
                 placeholder = "",
                 enable = false,
                 value = "Test",
-                onValueChanged = { }
+                onValueChanged = { },
             )
 
             Spacer(modifier = Modifier.padding(vertical = dimensionResource(R.dimen.very_small)))
@@ -169,7 +175,7 @@ fun ProfileScreen(
                 placeholder = "",
                 enable = false,
                 value = "User",
-                onValueChanged = { }
+                onValueChanged = { },
             )
 
             Spacer(modifier = Modifier.padding(vertical = dimensionResource(R.dimen.very_small)))
@@ -179,7 +185,7 @@ fun ProfileScreen(
                 placeholder = "",
                 enable = false,
                 value = "rakesh09@gmail.com",
-                onValueChanged = { }
+                onValueChanged = { },
             )
 
             Spacer(modifier = Modifier.padding(vertical = dimensionResource(R.dimen.very_small)))
@@ -189,7 +195,7 @@ fun ProfileScreen(
                 placeholder = "",
                 enable = false,
                 value = "+91 - 8249661234",
-                onValueChanged = { }
+                onValueChanged = { },
             )
 
             Spacer(modifier = Modifier.padding(vertical = dimensionResource(R.dimen.small)))
@@ -198,71 +204,74 @@ fun ProfileScreen(
                 text = "Email Notifications",
                 fontFamily = FontFamily.Serif,
                 fontWeight = FontWeight.Bold,
-                fontSize = dimensionResource(R.dimen.medium_large).value.sp
+                fontSize = dimensionResource(R.dimen.medium_large).value.sp,
             )
 
-            val notificationsList = remember {
-                mutableStateMapOf(
-                    "Order Status" to false,
-                    "Password Changes" to false,
-                    "Special Offers" to false,
-                    "Newsletter" to false
-                )
-            }
+            val notificationsList =
+                remember {
+                    mutableStateMapOf(
+                        "Order Status" to false,
+                        "Password Changes" to false,
+                        "Special Offers" to false,
+                        "Newsletter" to false,
+                    )
+                }
 
             Column(
-                modifier = Modifier
+                modifier =
+                Modifier
                     .padding(top = dimensionResource(R.dimen.very_small))
                     .clip(
                         RoundedCornerShape(
-                            dimensionResource(R.dimen.small)
-                        )
-                    )
-                    .border(
+                            dimensionResource(R.dimen.small),
+                        ),
+                    ).border(
                         width = 1.dp,
                         color = colorResource(R.color.light_gray),
-                        shape = RoundedCornerShape(dimensionResource(R.dimen.small))
-                    )
+                        shape = RoundedCornerShape(dimensionResource(R.dimen.small)),
+                    ),
             ) {
                 notificationsList.forEach { (notification, checked) ->
                     Column {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
-                            verticalAlignment = Alignment.CenterVertically
+                            verticalAlignment = Alignment.CenterVertically,
                         ) {
                             Checkbox(
                                 checked = checked,
                                 onCheckedChange = {
                                     notificationsList[notification] = !checked
                                 },
-                                colors = CheckboxDefaults.colors(
+                                colors =
+                                CheckboxDefaults.colors(
                                     uncheckedColor = colorResource(R.color.gray),
                                     checkedColor = colorResource(R.color.green),
-                                    checkmarkColor = colorResource(R.color.yellow)
+                                    checkmarkColor = colorResource(R.color.yellow),
                                 ),
                             )
 
                             Text(
-                                text = notification
+                                text = notification,
                             )
                         }
 
                         Spacer(
-                            modifier = Modifier
+                            modifier =
+                            Modifier
                                 .height(1.dp)
                                 .fillMaxWidth()
-                                .background(colorResource(R.color.light_gray))
+                                .background(colorResource(R.color.light_gray)),
                         )
                     }
                 }
-
             }
         }
 
         Button(
             onClick = {
             },
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxWidth()
                 .padding(
                     start = dimensionResource(R.dimen.medium_large),
@@ -272,15 +281,16 @@ fun ProfileScreen(
                 ),
             contentPadding = PaddingValues(dimensionResource(R.dimen.small)),
             shape = RoundedCornerShape(dimensionResource(R.dimen.very_small)),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = colorResource(R.color.green)
-            )
+            colors =
+            ButtonDefaults.buttonColors(
+                containerColor = colorResource(R.color.green),
+            ),
         ) {
             Text(
                 text = "Log out",
                 fontSize = dimensionResource(R.dimen.medium).value.sp,
                 color = colorResource(R.color.yellow),
-                fontFamily = FontFamily.SansSerif
+                fontFamily = FontFamily.SansSerif,
             )
         }
     }

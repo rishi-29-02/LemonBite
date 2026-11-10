@@ -47,57 +47,65 @@ import com.rm.lemonbite.presentation.customComponents.LemonBiteHeading
 fun PreferencesScreen(
     modifier: Modifier = Modifier,
     onNextClicked: () -> Unit,
-    preferencesViewModel: PreferencesViewModel = hiltViewModel()
+    preferencesViewModel: PreferencesViewModel = hiltViewModel(),
 ) {
     val courses = preferencesViewModel.courses
     val selected = preferencesViewModel.selected.collectAsStateWithLifecycle().value
     val context = LocalContext.current
 
     Column(
-        modifier = modifier
+        modifier =
+        modifier
             .fillMaxSize()
-            .padding(dimensionResource(R.dimen.medium))
+            .padding(dimensionResource(R.dimen.medium)),
     ) {
         Column(
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(1f),
         ) {
-
             LemonBiteHeading()
 
             Card(
-                modifier = Modifier
+                modifier =
+                Modifier
                     .fillMaxWidth()
                     .padding(top = 100.dp, bottom = 30.dp),
                 shape = RoundedCornerShape(dimensionResource(R.dimen.small)),
-                colors = CardDefaults.cardColors(
-                    colorResource(R.color.green)
-                )
+                colors =
+                CardDefaults.cardColors(
+                    colorResource(R.color.green),
+                ),
             ) {
                 Column(
-                    modifier = Modifier
+                    modifier =
+                    Modifier
                         .padding(dimensionResource(R.dimen.medium_large))
                         .fillMaxWidth(),
                     verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Text(
                         text = "What do you like ?",
                         fontSize = dimensionResource(R.dimen.medium_large).value.sp,
                         fontWeight = FontWeight.Bold,
                         color = colorResource(R.color.yellow),
-                        fontFamily = FontFamily.Serif
+                        fontFamily = FontFamily.Serif,
                     )
 
-                    Spacer(modifier = Modifier.padding(vertical = dimensionResource(R.dimen.very_small)))
+                    Spacer(
+                        modifier = Modifier.padding(
+                            vertical = dimensionResource(R.dimen.very_small),
+                        ),
+                    )
 
                     Text(
-                        text = "Choose the courses you enjoy and we'll \n" +
-                                "personalize your menu.",
+                        text =
+                        "Choose the courses you enjoy and we'll \n" +
+                            "personalize your menu.",
                         fontSize = dimensionResource(R.dimen.medium_small).value.sp,
                         fontWeight = FontWeight.Medium,
                         color = colorResource(R.color.white),
                         fontFamily = FontFamily.Serif,
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
                     )
                 }
             }
@@ -110,7 +118,7 @@ fun PreferencesScreen(
                 },
                 addCourse = {
                     preferencesViewModel.addCourse(it)
-                }
+                },
             )
         }
 
@@ -122,24 +130,24 @@ fun PreferencesScreen(
                     },
                     onError = {
                         Toast.makeText(context, "Failed to save prefs", Toast.LENGTH_SHORT).show()
-                    }
+                    },
                 )
             },
             modifier = Modifier.fillMaxWidth(),
             contentPadding = PaddingValues(dimensionResource(R.dimen.small)),
             shape = RoundedCornerShape(dimensionResource(R.dimen.very_small)),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = colorResource(R.color.green)
-            )
+            colors =
+            ButtonDefaults.buttonColors(
+                containerColor = colorResource(R.color.green),
+            ),
         ) {
             Text(
                 text = stringResource(R.string.next),
                 fontSize = dimensionResource(R.dimen.medium).value.sp,
                 color = colorResource(R.color.yellow),
-                fontFamily = FontFamily.SansSerif
+                fontFamily = FontFamily.SansSerif,
             )
         }
-
     }
 }
 
@@ -148,79 +156,80 @@ fun CoursesList(
     courses: List<String>,
     selected: Set<String>,
     removeCourse: (String) -> Unit,
-    addCourse: (String) -> Unit
+    addCourse: (String) -> Unit,
 ) {
     courses.forEach { course ->
         CourseItem(
             course,
-            course in selected
+            course in selected,
         ) { course ->
-            if (course in selected) removeCourse(course)
-            else addCourse(course)
+            if (course in selected) {
+                removeCourse(course)
+            } else {
+                addCourse(course)
+            }
         }
     }
 }
 
 @Composable
-fun CourseItem(
-    course: String,
-    selected: Boolean,
-    onCourseClicked: (String) -> Unit
-) {
+fun CourseItem(course: String, selected: Boolean, onCourseClicked: (String) -> Unit) {
     Row(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
             .padding(vertical = dimensionResource(R.dimen.very_small))
             .clip(
-                shape = RoundedCornerShape(
-                    dimensionResource(R.dimen.medium)
-                )
-            )
-            .background(if (selected) colorResource(R.color.green) else Color.White)
+                shape =
+                RoundedCornerShape(
+                    dimensionResource(R.dimen.medium),
+                ),
+            ).background(if (selected) colorResource(R.color.green) else Color.White)
             .border(
                 width = 1.5.dp,
                 color = if (selected) colorResource(R.color.green) else Color.Gray,
-                shape = RoundedCornerShape(
-                    dimensionResource(R.dimen.medium)
-                )
-            )
-            .clickable(
+                shape =
+                RoundedCornerShape(
+                    dimensionResource(R.dimen.medium),
+                ),
+            ).clickable(
                 onClick = {
                     onCourseClicked(course)
-                }
+                },
             ),
         horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
             text = course,
-            modifier = Modifier
+            modifier =
+            Modifier
                 .padding(dimensionResource(R.dimen.medium))
                 .weight(1f),
             fontWeight = FontWeight.SemiBold,
             fontSize = dimensionResource(R.dimen.medium_small).value.sp,
-            color = if (selected) colorResource(R.color.white) else colorResource(R.color.black)
+            color = if (selected) colorResource(R.color.white) else colorResource(R.color.black),
         )
 
         Box(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .padding(dimensionResource(R.dimen.small))
                 .clip(CircleShape)
                 .background(if (selected) colorResource(R.color.yellow) else Color.LightGray)
                 .border(
                     width = 1.dp,
                     color = if (selected) colorResource(R.color.green) else Color.Gray,
-                    shape = CircleShape
-                )
-                .size(32.dp),
-            contentAlignment = Alignment.Center
+                    shape = CircleShape,
+                ).size(32.dp),
+            contentAlignment = Alignment.Center,
         ) {
             if (selected) {
                 Icon(
                     imageVector = Icons.Default.Check,
                     contentDescription = "Check Course",
                     tint = colorResource(R.color.green),
-                    modifier = Modifier.size(20.dp)
+                    modifier = Modifier.size(20.dp),
                 )
             }
         }

@@ -4,20 +4,25 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rm.lemonbite.data.local.preferences.UserPreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
-class PreferencesViewModel @Inject constructor(
-    private val userPreferencesRepository: UserPreferencesRepository
+class PreferencesViewModel
+@Inject
+constructor(
+    private val userPreferencesRepository: UserPreferencesRepository,
 ) : ViewModel() {
-
-    val courses = listOf(
-        "Starters", "Mains", "Desserts", "Sides"
-    )
+    val courses =
+        listOf(
+            "Starters",
+            "Mains",
+            "Desserts",
+            "Sides",
+        )
 
     private var _selected = MutableStateFlow<Set<String>>(emptySet())
 
@@ -27,10 +32,7 @@ class PreferencesViewModel @Inject constructor(
 
     fun addCourse(course: String) = _selected.update { it + course }
 
-    fun setOnboardingData(
-        onSuccess: () -> Unit,
-        onError: (Throwable) -> Unit
-    ) {
+    fun setOnboardingData(onSuccess: () -> Unit, onError: (Throwable) -> Unit) {
         viewModelScope.launch {
             try {
                 userPreferencesRepository.setPrefs(_selected.value)

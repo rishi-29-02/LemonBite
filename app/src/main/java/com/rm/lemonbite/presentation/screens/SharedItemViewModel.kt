@@ -5,8 +5,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class SharedItemViewModel @Inject constructor(
-
-): ViewModel() {
-
-}
+class SharedItemViewModel
+@Inject
+constructor() : ViewModel()

@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -28,21 +27,23 @@ fun TopMenuBar(
     showBackButton: Boolean,
     onCartClicked: () -> Unit,
     onProfileIconClick: () -> Unit = {},
-    onBackClick: () -> Unit = {}
+    onBackClick: () -> Unit = {},
 ) {
     Box(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
-            .padding(dimensionResource(R.dimen.small))
+            .padding(dimensionResource(R.dimen.small)),
     ) {
         if (showBackButton) {
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                 contentDescription = "Back Button",
-                modifier = Modifier
+                modifier =
+                Modifier
                     .align(Alignment.CenterStart)
                     .padding(horizontal = dimensionResource(R.dimen.very_small))
-                    .clickable { onBackClick() }
+                    .clickable { onBackClick() },
             )
         }
 
@@ -52,33 +53,37 @@ fun TopMenuBar(
             fontFamily = FontFamily.Serif,
             color = colorResource(R.color.green),
             fontWeight = FontWeight.SemiBold,
-            modifier = Modifier.align(Alignment.Center)
+            modifier = Modifier.align(Alignment.Center),
         )
 
         Row(
             modifier = Modifier.align(Alignment.CenterEnd),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
                 imageVector = Icons.Default.ShoppingCart,
                 contentDescription = "Notifications",
-                modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.very_small))
+                modifier =
+                Modifier
+                    .padding(horizontal = dimensionResource(R.dimen.very_small))
                     .clickable(
                         onClick = {
                             onCartClicked()
-                        }
-                    )
+                        },
+                    ),
             )
 
             Icon(
                 imageVector = Icons.Default.AccountCircle,
                 contentDescription = "Profile",
-                modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.very_small))
+                modifier =
+                Modifier
+                    .padding(horizontal = dimensionResource(R.dimen.very_small))
                     .clickable(
                         onClick = {
                             onProfileIconClick()
-                        }
-                    )
+                        },
+                    ),
             )
         }
     }

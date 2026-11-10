@@ -26,16 +26,16 @@ fun CustomOutlinedTextField(
     value: String,
     enable: Boolean,
     onValueChanged: (String) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth(),
     ) {
         Text(
             text = headline,
             color = colorResource(R.color.green),
             fontFamily = FontFamily.SansSerif,
-            fontWeight = FontWeight.Medium
+            fontWeight = FontWeight.Medium,
         )
 
         Spacer(modifier = Modifier.padding(bottom = dimensionResource(R.dimen.very_small)))
@@ -50,23 +50,26 @@ fun CustomOutlinedTextField(
                 Text(
                     text = placeholder,
                     color = Color.Gray,
-                    fontFamily = FontFamily.SansSerif
+                    fontFamily = FontFamily.SansSerif,
                 )
             },
             modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(
-                dimensionResource(R.dimen.small)
+            shape =
+            RoundedCornerShape(
+                dimensionResource(R.dimen.small),
             ),
-            colors = OutlinedTextFieldDefaults.colors(
+            colors =
+            OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = colorResource(R.color.green),
                 unfocusedBorderColor = colorResource(R.color.green),
                 focusedContainerColor = colorResource(R.color.white),
                 unfocusedContainerColor = colorResource(R.color.white),
                 disabledTextColor = colorResource(R.color.black),
-                disabledBorderColor = colorResource(R.color.green)
+                disabledBorderColor = colorResource(R.color.green),
             ),
-            keyboardOptions = KeyboardOptions(
-                imeAction = ImeAction.Done
+            keyboardOptions =
+            KeyboardOptions(
+                imeAction = ImeAction.Done,
             ),
         )
     }

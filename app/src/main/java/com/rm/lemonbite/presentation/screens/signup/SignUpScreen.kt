@@ -41,58 +41,69 @@ import com.rm.lemonbite.presentation.customComponents.LemonBiteHeading
 fun SignUpScreen(
     modifier: Modifier = Modifier,
     onNextClicked: () -> Unit,
-    signUpViewModel: SignUpViewModel = hiltViewModel()
+    signUpViewModel: SignUpViewModel = hiltViewModel(),
 ) {
     val name = signUpViewModel.firstName.collectAsStateWithLifecycle().value
     val email = signUpViewModel.email.collectAsStateWithLifecycle().value
     val context = LocalContext.current
 
-    BoxWithConstraints (
-        modifier = modifier
+    BoxWithConstraints(
+        modifier =
+        modifier
             .fillMaxSize()
-            .padding(dimensionResource(R.dimen.large))
+            .padding(dimensionResource(R.dimen.large)),
     ) {
         Column(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .heightIn(maxHeight)
                 .imePadding() // Make the EditText focused
-                .verticalScroll(rememberScrollState()), // make the edittext scrollable
-            verticalArrangement = Arrangement.SpaceBetween
+                .verticalScroll(rememberScrollState()),
+            // make the edittext scrollable
+            verticalArrangement = Arrangement.SpaceBetween,
         ) {
-            Column{
+            Column {
                 LemonBiteHeading()
 
                 Card(
                     modifier = Modifier.fillMaxWidth().padding(vertical = 100.dp),
                     shape = RoundedCornerShape(dimensionResource(R.dimen.small)),
-                    colors = CardDefaults.cardColors(
-                        colorResource(R.color.green)
-                    )
+                    colors =
+                    CardDefaults.cardColors(
+                        colorResource(R.color.green),
+                    ),
                 ) {
                     Column(
-                        modifier = Modifier
-                            .padding(dimensionResource(R.dimen.medium_large)).fillMaxWidth(),
+                        modifier =
+                        Modifier
+                            .padding(dimensionResource(R.dimen.medium_large))
+                            .fillMaxWidth(),
                         verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
+                        horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
                         Text(
                             text = "Let us get to know you",
                             fontSize = dimensionResource(R.dimen.medium_large).value.sp,
                             fontWeight = FontWeight.Bold,
                             color = colorResource(R.color.yellow),
-                            fontFamily = FontFamily.Serif
+                            fontFamily = FontFamily.Serif,
                         )
 
-                        Spacer(modifier = Modifier.padding(vertical = dimensionResource(R.dimen.very_small)))
+                        Spacer(
+                            modifier = Modifier.padding(
+                                vertical = dimensionResource(R.dimen.very_small),
+                            ),
+                        )
 
                         Text(
-                            text = "Enter the details below to start ordering fresh " +
-                                    "Mediterranean meals.",
+                            text =
+                            "Enter the details below to start ordering fresh " +
+                                "Mediterranean meals.",
                             fontSize = dimensionResource(R.dimen.medium_small).value.sp,
                             fontWeight = FontWeight.Medium,
                             color = colorResource(R.color.white),
                             fontFamily = FontFamily.Serif,
-                            textAlign = TextAlign.Center
+                            textAlign = TextAlign.Center,
                         )
                     }
                 }
@@ -102,7 +113,7 @@ fun SignUpScreen(
                     placeholder = "Enter First Name",
                     enable = true,
                     value = name,
-                    onValueChanged = { signUpViewModel.updateFirstName(it) }
+                    onValueChanged = { signUpViewModel.updateFirstName(it) },
                 )
 
                 Spacer(modifier = Modifier.padding(vertical = dimensionResource(R.dimen.medium)))
@@ -112,7 +123,7 @@ fun SignUpScreen(
                     placeholder = "Ex. rakesh09@gmail.com",
                     enable = true,
                     value = email,
-                    onValueChanged = { signUpViewModel.updateEmail(it) }
+                    onValueChanged = { signUpViewModel.updateEmail(it) },
                 )
             }
 
@@ -129,22 +140,23 @@ fun SignUpScreen(
                             },
                             onError = {
                                 Toast.makeText(context, "Failed to Save", Toast.LENGTH_SHORT).show()
-                            }
+                            },
                         )
                     }
                 },
                 modifier = Modifier.fillMaxWidth(),
                 contentPadding = PaddingValues(dimensionResource(R.dimen.small)),
                 shape = RoundedCornerShape(dimensionResource(R.dimen.very_small)),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = colorResource(R.color.green)
-                )
+                colors =
+                ButtonDefaults.buttonColors(
+                    containerColor = colorResource(R.color.green),
+                ),
             ) {
                 Text(
                     text = stringResource(R.string.next),
                     fontSize = dimensionResource(R.dimen.medium).value.sp,
                     color = colorResource(R.color.yellow),
-                    fontFamily = FontFamily.SansSerif
+                    fontFamily = FontFamily.SansSerif,
                 )
             }
         }

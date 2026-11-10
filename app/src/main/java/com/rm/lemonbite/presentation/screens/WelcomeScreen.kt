@@ -26,48 +26,51 @@ import com.rm.lemonbite.R
 import com.rm.lemonbite.presentation.customComponents.LemonBiteHeading
 
 @Composable
-fun WelcomeScreen(
-    modifier: Modifier = Modifier,
-    onGetStartedClicked: () -> Unit
-) {
+fun WelcomeScreen(modifier: Modifier = Modifier, onGetStartedClicked: () -> Unit) {
     Column(
-        modifier = modifier
+        modifier =
+        modifier
             .fillMaxSize()
-            .padding(dimensionResource(R.dimen.medium_large))
+            .padding(dimensionResource(R.dimen.medium_large)),
     ) {
         LemonBiteHeading()
 
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(1f),
         ) {
             Image(
                 painterResource(
-                    R.drawable.welcome_hero
+                    R.drawable.welcome_hero,
                 ),
                 contentDescription = null,
-                modifier = modifier
-                    .clip(RoundedCornerShape(dimensionResource(R.dimen.small)))
+                modifier =
+                modifier
+                    .clip(RoundedCornerShape(dimensionResource(R.dimen.small))),
             )
 
             Text(
-                text = stringResource(R.string.welcome_to) + " " + stringResource(R.string.app_name),
+                text = stringResource(
+                    R.string.welcome_to,
+                ) + " " + stringResource(R.string.app_name),
                 fontSize = dimensionResource(R.dimen.large).value.sp,
                 fontWeight = FontWeight.Bold,
                 color = colorResource(R.color.green),
-                modifier = Modifier.padding(
-                    dimensionResource(R.dimen.small)
+                modifier =
+                Modifier.padding(
+                    dimensionResource(R.dimen.small),
                 ),
-                fontFamily = FontFamily.SansSerif
+                fontFamily = FontFamily.SansSerif,
             )
 
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = "Fresh Mediterranean favorites, family recipes, and" +
-                        " warm hospitality—made for every table.",
+                text =
+                "Fresh Mediterranean favorites, family recipes, and" +
+                    " warm hospitality—made for every table.",
                 fontFamily = FontFamily.SansSerif,
-                fontWeight = FontWeight.SemiBold
+                fontWeight = FontWeight.SemiBold,
             )
         }
 
@@ -78,15 +81,16 @@ fun WelcomeScreen(
             modifier = Modifier.fillMaxWidth(),
             contentPadding = PaddingValues(dimensionResource(R.dimen.small)),
             shape = RoundedCornerShape(dimensionResource(R.dimen.very_small)),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = colorResource(R.color.green)
-            )
+            colors =
+            ButtonDefaults.buttonColors(
+                containerColor = colorResource(R.color.green),
+            ),
         ) {
             Text(
                 text = stringResource(R.string.get_started),
                 fontSize = dimensionResource(R.dimen.medium).value.sp,
                 color = colorResource(R.color.yellow),
-                fontFamily = FontFamily.SansSerif
+                fontFamily = FontFamily.SansSerif,
             )
         }
     }
