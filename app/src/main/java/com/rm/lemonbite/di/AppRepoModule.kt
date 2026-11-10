@@ -1,8 +1,8 @@
 package com.rm.lemonbite.di
 
 import com.rm.lemonbite.data.local.room.repository.CartRepositoryImpl
-import com.rm.lemonbite.data.remote.MenuRepositoryImpl
 import com.rm.lemonbite.data.local.room.repository.OrderRepositoryImpl
+import com.rm.lemonbite.data.remote.MenuRepositoryImpl
 import com.rm.lemonbite.domain.repository.CartRepository
 import com.rm.lemonbite.domain.repository.MenuRepository
 import com.rm.lemonbite.domain.repository.OrderRepository
@@ -15,7 +15,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class AppRepoModule {
-
     @Binds
     @Singleton
     abstract fun bindMenuRepository(menuRepositoryImpl: MenuRepositoryImpl): MenuRepository

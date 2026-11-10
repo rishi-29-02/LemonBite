@@ -23,21 +23,22 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
     private val mainViewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge(
-            statusBarStyle = SystemBarStyle.light(
+            statusBarStyle =
+            SystemBarStyle.light(
                 android.graphics.Color.TRANSPARENT,
-                android.graphics.Color.TRANSPARENT
+                android.graphics.Color.TRANSPARENT,
             ),
-            navigationBarStyle = SystemBarStyle.light(
+            navigationBarStyle =
+            SystemBarStyle.light(
                 android.graphics.Color.TRANSPARENT,
-                android.graphics.Color.TRANSPARENT
-            )
+                android.graphics.Color.TRANSPARENT,
+            ),
         )
 
         setContent {
@@ -46,25 +47,27 @@ class MainActivity : ComponentActivity() {
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     val navController = rememberNavController()
-                    when(startState) {
+                    when (startState) {
                         StartState.Loading -> Unit
-                        StartState.Home -> AppNavGraph(
-                            Modifier
-                                .background(color = colorResource(R.color.background))
-                                .padding(innerPadding)
-                                .consumeWindowInsets(innerPadding),
-                            navController,
-                            StartState.Home
-                        )
+                        StartState.Home ->
+                            AppNavGraph(
+                                Modifier
+                                    .background(color = colorResource(R.color.background))
+                                    .padding(innerPadding)
+                                    .consumeWindowInsets(innerPadding),
+                                navController,
+                                StartState.Home,
+                            )
 
-                        StartState.Welcome -> AppNavGraph(
-                            Modifier
-                                .background(color = colorResource(R.color.background))
-                                .padding(innerPadding)
-                                .consumeWindowInsets(innerPadding),
-                            navController,
-                            StartState.Welcome
-                        )
+                        StartState.Welcome ->
+                            AppNavGraph(
+                                Modifier
+                                    .background(color = colorResource(R.color.background))
+                                    .padding(innerPadding)
+                                    .consumeWindowInsets(innerPadding),
+                                navController,
+                                StartState.Welcome,
+                            )
                     }
                 }
             }

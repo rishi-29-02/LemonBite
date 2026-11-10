@@ -17,18 +17,16 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 val Context.datastore by preferencesDataStore(
-    name = "lemonbite_datastore"
+    name = "lemonbite_datastore",
 )
 
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-
     @Provides
     @Singleton
-    fun provideDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
-        return context.datastore
-    }
+    fun provideDataStore(@ApplicationContext context: Context): DataStore<Preferences> =
+        context.datastore
 
     @Provides
     @Singleton
@@ -36,21 +34,17 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideAppDatabase(@ApplicationContext context: Context): LemonBiteDatabase {
-        return Room.databaseBuilder(
+    fun provideAppDatabase(@ApplicationContext context: Context): LemonBiteDatabase = Room
+        .databaseBuilder(
             context,
             LemonBiteDatabase::class.java,
-            "lemonbite_database"
+            "lemonbite_database",
         ).build()
-    }
 
     @Provides
-    fun provideOrderItemDao(appDatabase: LemonBiteDatabase): OrderItemDao {
-        return appDatabase.orderItemDao()
-    }
+    fun provideOrderItemDao(appDatabase: LemonBiteDatabase): OrderItemDao =
+        appDatabase.orderItemDao()
 
     @Provides
-    fun provideCartDao(appDatabase: LemonBiteDatabase): CartDao {
-        return appDatabase.cartDao()
-    }
+    fun provideCartDao(appDatabase: LemonBiteDatabase): CartDao = appDatabase.cartDao()
 }

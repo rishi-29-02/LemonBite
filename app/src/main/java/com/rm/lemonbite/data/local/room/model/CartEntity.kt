@@ -9,5 +9,5 @@ data class CartEntity(
     @PrimaryKey
     val id: Int = 1,
     val items: List<MenuItem> = emptyList(),
-    val totalPrice: Double = 0.0
+    val totalPrice: Double = 0.0,
 )

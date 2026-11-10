@@ -26,29 +26,32 @@ import com.rm.lemonbite.R
 @Composable
 fun LemonBiteHeading() {
     Row(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
             .wrapContentHeight(),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
             text = stringResource(R.string.app_name),
             fontSize = dimensionResource(R.dimen.large).value.sp,
             fontWeight = FontWeight.Bold,
             color = colorResource(R.color.green),
-            fontFamily = FontFamily.Serif
+            fontFamily = FontFamily.Serif,
         )
 
         Spacer(modifier = Modifier.padding(start = dimensionResource(R.dimen.medium)))
 
         Image(
-            painter = painterResource(
-                R.drawable.ic_lemon_bite
+            painter =
+            painterResource(
+                R.drawable.ic_lemon_bite,
             ),
             contentDescription = null,
-            modifier = Modifier
+            modifier =
+            Modifier
                 .size(40.dp)
-                .clip(RoundedCornerShape(dimensionResource(R.dimen.small)))
+                .clip(RoundedCornerShape(dimensionResource(R.dimen.small))),
         )
     }
 }

@@ -6,32 +6,32 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.rm.lemonbite.domain.StartState
+import com.rm.lemonbite.presentation.screens.ProfileScreen
+import com.rm.lemonbite.presentation.screens.WelcomeScreen
 import com.rm.lemonbite.presentation.screens.dishDetailScreen.DishDetailsScreen
 import com.rm.lemonbite.presentation.screens.home.HomeScreen
 import com.rm.lemonbite.presentation.screens.orderSummary.OrderSummaryScreen
-import com.rm.lemonbite.presentation.screens.ProfileScreen
-import com.rm.lemonbite.presentation.screens.trackOrder.TrackOrderScreen
-import com.rm.lemonbite.presentation.screens.WelcomeScreen
 import com.rm.lemonbite.presentation.screens.preferences.PreferencesScreen
 import com.rm.lemonbite.presentation.screens.signup.SignUpScreen
+import com.rm.lemonbite.presentation.screens.trackOrder.TrackOrderScreen
 
 @Composable
-fun AppNavGraph(
-    modifier: Modifier,
-    navHostController: NavHostController,
-    startState: StartState
-) {
+fun AppNavGraph(modifier: Modifier, navHostController: NavHostController, startState: StartState) {
     NavHost(
         navController = navHostController,
-        startDestination = if (startState == StartState.Welcome) NavRoutes.WelcomeScreen
-        else NavRoutes.HomeScreen
+        startDestination =
+        if (startState == StartState.Welcome) {
+            NavRoutes.WelcomeScreen
+        } else {
+            NavRoutes.HomeScreen
+        },
     ) {
         composable<NavRoutes.WelcomeScreen> {
             WelcomeScreen(
                 modifier,
                 onGetStartedClicked = {
                     navHostController.navigate(NavRoutes.SignUpScreen)
-                }
+                },
             )
         }
 
@@ -40,9 +40,9 @@ fun AppNavGraph(
                 modifier,
                 onNextClicked = {
                     navHostController.navigate(
-                        NavRoutes.PreferencesScreen
+                        NavRoutes.PreferencesScreen,
                     )
-                }
+                },
             )
         }
 
@@ -50,13 +50,13 @@ fun AppNavGraph(
             PreferencesScreen(
                 modifier = modifier,
                 onNextClicked = {
-                    navHostController.navigate(NavRoutes.HomeScreen){
+                    navHostController.navigate(NavRoutes.HomeScreen) {
                         popUpTo(0) {
                             inclusive = true
                         }
                         launchSingleTop = true
                     }
-                }
+                },
             )
         }
 
@@ -71,7 +71,7 @@ fun AppNavGraph(
                 },
                 navigateToProfileScreen = {
                     navHostController.navigate(NavRoutes.ProfileScreen)
-                }
+                },
             )
         }
 
@@ -89,7 +89,7 @@ fun AppNavGraph(
                 },
                 onBackClick = {
                     navHostController.popBackStack()
-                }
+                },
             )
         }
 
@@ -101,7 +101,7 @@ fun AppNavGraph(
                 },
                 onBackClick = {
                     navHostController.popBackStack()
-                }
+                },
             )
         }
 
@@ -121,7 +121,7 @@ fun AppNavGraph(
                         }
                         launchSingleTop = true
                     }
-                }
+                },
             )
         }
 
@@ -132,8 +132,8 @@ fun AppNavGraph(
                     navHostController.navigate(NavRoutes.OrderSummaryScreen)
                 },
                 onBackClicked = {
-                    navHostController.navigate(NavRoutes.HomeScreen){
-                        popUpTo(NavRoutes.HomeScreen){
+                    navHostController.navigate(NavRoutes.HomeScreen) {
+                        popUpTo(NavRoutes.HomeScreen) {
                             inclusive = false
                         }
                         launchSingleTop = true
@@ -141,7 +141,7 @@ fun AppNavGraph(
                 },
                 navigateToProfileScreen = {
                     navHostController.navigate(NavRoutes.ProfileScreen)
-                }
+                },
             )
         }
     }

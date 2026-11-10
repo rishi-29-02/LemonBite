@@ -6,12 +6,8 @@ import kotlinx.serialization.json.Json
 
 class TypeConvertors {
     @TypeConverter
-    fun fromMenuItemList(menuItems: List<MenuItem>): String {
-        return Json.encodeToString(menuItems)
-    }
+    fun fromMenuItemList(menuItems: List<MenuItem>): String = Json.encodeToString(menuItems)
 
     @TypeConverter
-    fun toMenuItemList(value: String): List<MenuItem> {
-        return Json.decodeFromString(value)
-    }
+    fun toMenuItemList(value: String): List<MenuItem> = Json.decodeFromString(value)
 }

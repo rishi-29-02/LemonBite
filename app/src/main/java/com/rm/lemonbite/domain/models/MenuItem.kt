@@ -12,7 +12,5 @@ data class MenuItem(
     val category: String = "",
     val addons: List<AddOnItem> = emptyList(),
     var qtySelected: Int = 1,
-    var totalItemPrice: Double = 0.0
+    var totalItemPrice: Double = 0.0,
 )
-
-

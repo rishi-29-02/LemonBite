@@ -8,18 +8,19 @@ import com.rm.lemonbite.domain.repository.CartRepository
 import com.rm.lemonbite.domain.repository.MenuRepository
 import com.rm.lemonbite.domain.repository.OrderRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
-class OrderSummaryViewModel @Inject constructor(
+class OrderSummaryViewModel
+@Inject
+constructor(
     private val menuRepository: MenuRepository,
     private val cartRepository: CartRepository,
-    private val orderRepository: OrderRepository
+    private val orderRepository: OrderRepository,
 ) : ViewModel() {
-
     private val _cartItemDetails = MutableStateFlow<List<MenuItem>>(emptyList())
     val cartItemDetails = _cartItemDetails.asStateFlow()
 
@@ -28,7 +29,6 @@ class OrderSummaryViewModel @Inject constructor(
 
     private var _totalPrice = MutableStateFlow(0.0)
     val totalPrice = _totalPrice.asStateFlow()
-
 
     init {
         getCartDetails()
@@ -72,8 +72,8 @@ class OrderSummaryViewModel @Inject constructor(
             orderRepository.insertOrderList(
                 OrderEntity(
                     orderedItems = _cartItemDetails.value,
-                    totalPrice = _totalPrice.value
-                )
+                    totalPrice = _totalPrice.value,
+                ),
             )
             cartRepository.clearCart()
             onOrderPlaced()

@@ -56,15 +56,18 @@ fun HomeScreen(
     navigateToCartScreen: () -> Unit,
     navigateToProfileScreen: () -> Unit,
     onItemSelected: (Int) -> Unit,
-    homeScreenViewModel: HomeScreenViewModel = hiltViewModel()
+    homeScreenViewModel: HomeScreenViewModel = hiltViewModel(),
 ) {
-
-    val courses = homeScreenViewModel.coursePrefsList.collectAsStateWithLifecycle().value.toList()
+    val courses =
+        homeScreenViewModel.coursePrefsList
+            .collectAsStateWithLifecycle()
+            .value
+            .toList()
     val selectedCourse = homeScreenViewModel.selectedCourses.collectAsStateWithLifecycle().value
     val menuUiState = homeScreenViewModel.menuUiState.collectAsStateWithLifecycle().value
 
     Column(
-        modifier = modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize(),
     ) {
         TopMenuBar(
             showBackButton = false,
@@ -73,27 +76,28 @@ fun HomeScreen(
             },
             onProfileIconClick = {
                 navigateToProfileScreen()
-            }
+            },
         )
 
         Box(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
                 .background(
-                    color = colorResource(R.color.green)
-                )
+                    color = colorResource(R.color.green),
+                ),
         ) {
             Column {
                 Row(
-                    modifier = Modifier
+                    modifier =
+                    Modifier
                         .padding(
                             start = dimensionResource(R.dimen.large),
                             top = dimensionResource(R.dimen.large),
                             end = dimensionResource(R.dimen.large),
-                        )
-                    ,
-                    verticalAlignment = Alignment.Top
+                        ),
+                    verticalAlignment = Alignment.Top,
                 ) {
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
@@ -110,35 +114,41 @@ fun HomeScreen(
                             fontFamily = FontFamily.Serif,
                             color = colorResource(R.color.white),
                             fontWeight = FontWeight.SemiBold,
-                            modifier = Modifier.padding(vertical = dimensionResource(R.dimen.small))
+                            modifier = Modifier.padding(
+                                vertical = dimensionResource(R.dimen.small),
+                            ),
                         )
 
                         Text(
-                            text = "We are a family-owned " +
-                                    "Mediterranean restaurant, " +
-                                    "focused on traditional recipes" +
-                                    " served with a modern twist.",
+                            text =
+                            "We are a family-owned " +
+                                "Mediterranean restaurant, " +
+                                "focused on traditional recipes" +
+                                " served with a modern twist.",
                             fontSize = dimensionResource(R.dimen.medium_small).value.sp,
                             fontFamily = FontFamily.SansSerif,
                             color = colorResource(R.color.white),
                         )
                     }
 
-                    Spacer(modifier = Modifier.padding(start = dimensionResource(R.dimen.very_small)))
+                    Spacer(
+                        modifier = Modifier.padding(start = dimensionResource(R.dimen.very_small)),
+                    )
 
                     Image(
-                        painter = painterResource(
-                            R.drawable.welcome_hero
+                        painter =
+                        painterResource(
+                            R.drawable.welcome_hero,
                         ),
                         contentDescription = null,
                         contentScale = ContentScale.Crop,
-                        modifier = Modifier
+                        modifier =
+                        Modifier
                             .clip(
                                 RoundedCornerShape(
-                                    dimensionResource(R.dimen.small)
-                                )
-                            )
-                            .size(150.dp)
+                                    dimensionResource(R.dimen.small),
+                                ),
+                            ).size(150.dp),
                     )
                 }
 
@@ -148,7 +158,7 @@ fun HomeScreen(
 
         LazyRow(
             modifier = Modifier.padding(dimensionResource(R.dimen.medium_small)),
-            horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.very_small))
+            horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.very_small)),
         ) {
             items(courses, key = { it }) { course ->
                 CourseChip(course, course in selectedCourse) {
@@ -162,35 +172,43 @@ fun HomeScreen(
         }
 
         when (menuUiState) {
-             is UiState.Loading -> {
-                 Box(
-                     modifier = Modifier.fillMaxWidth().padding(32.dp),
-                     contentAlignment = Alignment.Center
-                 ) {
-                     CircularProgressIndicator(color = colorResource(R.color.green))
-                 }
+            is UiState.Loading -> {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(32.dp),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    CircularProgressIndicator(color = colorResource(R.color.green))
+                }
             }
 
             is UiState.Success -> {
-                val grouped = remember(menuUiState) {
-                    menuUiState.data.groupBy { name -> name.category.trim().lowercase().trimEnd('s') }
-                }
-
-                val sections = remember(courses, selectedCourse, grouped) {
-                    when {
-                        courses.isEmpty() -> grouped.keys.toList()
-                        selectedCourse.isEmpty() -> courses
-                        else -> courses.filter { it in selectedCourse }
+                val grouped =
+                    remember(menuUiState) {
+                        menuUiState.data.groupBy { name ->
+                            name.category
+                                .trim()
+                                .lowercase()
+                                .trimEnd('s')
+                        }
                     }
-                }
+
+                val sections =
+                    remember(courses, selectedCourse, grouped) {
+                        when {
+                            courses.isEmpty() -> grouped.keys.toList()
+                            selectedCourse.isEmpty() -> courses
+                            else -> courses.filter { it in selectedCourse }
+                        }
+                    }
 
                 LazyColumn(
-                    modifier = Modifier
+                    modifier =
+                    Modifier
                         .padding(
                             top = dimensionResource(R.dimen.medium_large),
                             start = dimensionResource(R.dimen.medium_large),
-                            end = dimensionResource(R.dimen.medium_large)
-                        )
+                            end = dimensionResource(R.dimen.medium_large),
+                        ),
                 ) {
                     sections.forEach { section ->
                         val keyName = section.trim().lowercase().trimEnd('s')
@@ -203,10 +221,11 @@ fun HomeScreen(
                                     fontFamily = FontFamily.Serif,
                                     fontSize = dimensionResource(R.dimen.medium_large).value.sp,
                                     fontWeight = FontWeight.Bold,
-                                    modifier = Modifier
+                                    modifier =
+                                    Modifier
                                         .fillMaxWidth()
                                         .background(colorResource(R.color.background))
-                                        .padding(bottom = dimensionResource(R.dimen.small))
+                                        .padding(bottom = dimensionResource(R.dimen.small)),
                                 )
                             }
 
@@ -223,7 +242,7 @@ fun HomeScreen(
             is UiState.Error -> {
                 Box(
                     modifier = Modifier.fillMaxWidth().padding(32.dp),
-                    contentAlignment = Alignment.Center
+                    contentAlignment = Alignment.Center,
                 ) {
                     Text("Couldn't load the menu")
                 }
@@ -235,63 +254,63 @@ fun HomeScreen(
 @Composable
 fun SearchTextField() {
     OutlinedTextField(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
-            .padding(dimensionResource(R.dimen.large))
-        ,
+            .padding(dimensionResource(R.dimen.large)),
         value = "",
         onValueChange = {
-
         },
         placeholder = {
             Text(
                 stringResource(R.string.search_menu_dishes_ingredients),
                 color = Color.Gray,
-                fontFamily = FontFamily.SansSerif
+                fontFamily = FontFamily.SansSerif,
             )
         },
         leadingIcon = {
             Icon(
                 imageVector = Icons.Default.Search,
-                contentDescription = "Search Icon"
+                contentDescription = "Search Icon",
             )
         },
-        colors = OutlinedTextFieldDefaults.colors(
+        colors =
+        OutlinedTextFieldDefaults.colors(
             focusedBorderColor = colorResource(R.color.green),
             unfocusedBorderColor = colorResource(R.color.green),
             focusedContainerColor = colorResource(R.color.bright_gray),
-            unfocusedContainerColor = colorResource(R.color.bright_gray)
+            unfocusedContainerColor = colorResource(R.color.bright_gray),
         ),
-        shape = RoundedCornerShape(
-            dimensionResource(R.dimen.medium)
-        )
+        shape =
+        RoundedCornerShape(
+            dimensionResource(R.dimen.medium),
+        ),
     )
 }
 
 @Composable
-fun CourseChip(
-    course: String,
-    isSelected: Boolean,
-    onChipClicked: (String) -> Unit
-) {
+fun CourseChip(course: String, isSelected: Boolean, onChipClicked: (String) -> Unit) {
     Box(
-        modifier = Modifier
+        modifier =
+        Modifier
             .padding(start = dimensionResource(R.dimen.very_small))
             .clip(RoundedCornerShape(dimensionResource(R.dimen.large)))
             .background(color = colorResource(R.color.green))
             .clickable(
                 onClick = {
                     onChipClicked(course)
-                }
-            )
+                },
+            ),
     ) {
         Text(
             text = course,
             fontSize = dimensionResource(R.dimen.medium_small).value.sp,
             color = if (isSelected) colorResource(R.color.yellow) else colorResource(R.color.white),
-            modifier = Modifier.padding(
+            modifier =
+            Modifier.padding(
                 horizontal = dimensionResource(R.dimen.medium_large),
-                vertical = dimensionResource(R.dimen.small)),
+                vertical = dimensionResource(R.dimen.small),
+            ),
             fontFamily = FontFamily.SansSerif,
             fontWeight = FontWeight.Bold,
         )
@@ -299,12 +318,10 @@ fun CourseChip(
 }
 
 @Composable
-fun CourseCard(
-    item: MenuItem,
-    onItemClicked: (Int) -> Unit
-) {
+fun CourseCard(item: MenuItem, onItemClicked: (Int) -> Unit) {
     Box(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
             .padding(bottom = dimensionResource(R.dimen.small))
             .clip(RoundedCornerShape(dimensionResource(R.dimen.small)))
@@ -312,38 +329,40 @@ fun CourseCard(
             .border(
                 width = 1.dp,
                 color = Color.Gray,
-                shape = RoundedCornerShape(dimensionResource(R.dimen.small))
-            )
-            .clickable(
+                shape = RoundedCornerShape(dimensionResource(R.dimen.small)),
+            ).clickable(
                 onClick = {
                     onItemClicked(item.id)
-                }
-            )
+                },
+            ),
     ) {
         Row(
-            modifier = Modifier.padding(dimensionResource(R.dimen.medium))
+            modifier = Modifier.padding(dimensionResource(R.dimen.medium)),
         ) {
             AsyncImage(
                 model = item.image,
                 contentDescription = item.title,
                 contentScale = ContentScale.Crop,
                 onError = { Log.e("CoilError", "${item.image} -> ${it.result.throwable}") },
-                modifier = Modifier
+                modifier =
+                Modifier
                     .size(80.dp)
                     .clip(
                         RoundedCornerShape(
-                            dimensionResource(R.dimen.small)
-                        )
-                    )
+                            dimensionResource(R.dimen.small),
+                        ),
+                    ),
             )
 
             Column(
-                modifier = Modifier.weight(1f)
-                    .padding(horizontal = dimensionResource(R.dimen.small))
+                modifier =
+                Modifier
+                    .weight(1f)
+                    .padding(horizontal = dimensionResource(R.dimen.small)),
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
                     Text(
                         text = item.title,
@@ -357,7 +376,7 @@ fun CourseCard(
                         fontWeight = FontWeight.SemiBold,
                         fontFamily = FontFamily.SansSerif,
                         fontSize = dimensionResource(R.dimen.medium).value.sp,
-                        color = colorResource(R.color.green)
+                        color = colorResource(R.color.green),
                     )
                 }
 
@@ -367,7 +386,7 @@ fun CourseCard(
                     overflow = TextOverflow.Ellipsis,
                     fontFamily = FontFamily.SansSerif,
                     fontWeight = FontWeight.Light,
-                    modifier = Modifier.padding(top = dimensionResource(R.dimen.very_small))
+                    modifier = Modifier.padding(top = dimensionResource(R.dimen.very_small)),
                 )
             }
         }

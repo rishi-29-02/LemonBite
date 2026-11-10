@@ -9,5 +9,5 @@ data class OrderEntity(
     @PrimaryKey(autoGenerate = true)
     val orderId: Int = 0,
     val orderedItems: List<MenuItem> = emptyList(),
-    val totalPrice: Double = 0.0
+    val totalPrice: Double = 0.0,
 )

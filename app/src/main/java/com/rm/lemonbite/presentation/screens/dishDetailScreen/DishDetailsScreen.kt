@@ -53,14 +53,15 @@ fun DishDetailsScreen(
     navigateToProfileScreen: () -> Unit,
     onAddToCartClicked: () -> Unit = {},
     onBackClick: () -> Unit,
-    detailViewModel: DishDetailViewModel = hiltViewModel()
+    detailViewModel: DishDetailViewModel = hiltViewModel(),
 ) {
-    val itemUiState = detailViewModel.itemUiState.collectAsStateWithLifecycle().value
+    val itemUiState = detailViewModel.itemUIState.collectAsStateWithLifecycle().value
     val totalAmount = detailViewModel.totalAmount.collectAsStateWithLifecycle().value
 
     Column(
-        modifier = modifier
-            .fillMaxSize()
+        modifier =
+        modifier
+            .fillMaxSize(),
     ) {
         TopMenuBar(
             showBackButton = true,
@@ -72,41 +73,43 @@ fun DishDetailsScreen(
             },
             onBackClick = {
                 onBackClick()
-            }
+            },
         )
 
-        when(itemUiState) {
+        when (itemUiState) {
             is UiState.Loading -> {
-
             }
             is UiState.Success -> {
                 val item = itemUiState.data
                 Column(
-                    modifier = Modifier
+                    modifier =
+                    Modifier
                         .verticalScroll(rememberScrollState())
                         .weight(1f)
                         .padding(
                             top = dimensionResource(R.dimen.large),
                             start = dimensionResource(R.dimen.medium_large),
                             end = dimensionResource(R.dimen.medium_large),
-                        )
+                        ),
                 ) {
                     AsyncImage(
                         model = item.image,
                         contentDescription = item.title,
                         contentScale = ContentScale.Crop,
-                        modifier = Modifier
+                        modifier =
+                        Modifier
                             .fillMaxWidth()
-                            .clip(RoundedCornerShape(dimensionResource(R.dimen.small)))
+                            .clip(RoundedCornerShape(dimensionResource(R.dimen.small))),
                     )
 
                     Column(
-                        modifier = Modifier
-                            .padding(vertical = dimensionResource(R.dimen.medium))
+                        modifier =
+                        Modifier
+                            .padding(vertical = dimensionResource(R.dimen.medium)),
                     ) {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
+                            horizontalArrangement = Arrangement.SpaceBetween,
                         ) {
                             Text(
                                 text = item.title,
@@ -115,7 +118,6 @@ fun DishDetailsScreen(
                                 color = colorResource(R.color.green),
                                 fontWeight = FontWeight.SemiBold,
                             )
-
 
                             Text(
                                 text = "$${item.price}",
@@ -129,30 +131,34 @@ fun DishDetailsScreen(
                             text = item.description,
                             fontSize = dimensionResource(R.dimen.medium_small).value.sp,
                             fontFamily = FontFamily.SansSerif,
-                            modifier = Modifier.padding( top =
-                                dimensionResource(R.dimen.small)
-                            )
+                            modifier =
+                            Modifier.padding(
+                                top =
+                                dimensionResource(R.dimen.small),
+                            ),
                         )
                     }
 
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
+                        verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Row(
-                            verticalAlignment = Alignment.CenterVertically
+                            verticalAlignment = Alignment.CenterVertically,
                         ) {
                             Icon(
                                 imageVector = Icons.Default.DeliveryDining,
                                 contentDescription = "Dining Truck",
-                                tint = colorResource(R.color.green)
+                                tint = colorResource(R.color.green),
                             )
 
                             Text(
                                 text = "Delivery time : 20 mins",
                                 fontFamily = FontFamily.SansSerif,
-                                modifier = Modifier.padding(start = dimensionResource(R.dimen.small))
+                                modifier = Modifier.padding(
+                                    start = dimensionResource(R.dimen.small),
+                                ),
                             )
                         }
 
@@ -166,55 +172,58 @@ fun DishDetailsScreen(
                     }
 
                     Row(
-                        modifier = Modifier
+                        modifier =
+                        Modifier
                             .fillMaxWidth()
                             .padding(vertical = dimensionResource(R.dimen.small)),
                         horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
+                        verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Text(
                             text = "Quantity",
                             fontFamily = FontFamily.SansSerif,
                             color = colorResource(R.color.green),
                             fontWeight = FontWeight.Bold,
-                            fontSize = dimensionResource(R.dimen.medium_large).value.sp
+                            fontSize = dimensionResource(R.dimen.medium_large).value.sp,
                         )
 
                         Row(
-                            modifier = Modifier
+                            modifier =
+                            Modifier
                                 .wrapContentWidth()
                                 .clip(CircleShape)
                                 .border(
                                     width = 1.dp,
                                     color = colorResource(R.color.light_gray),
-                                    CircleShape
-                                )
-                            ,
-                            verticalAlignment = Alignment.CenterVertically
+                                    CircleShape,
+                                ),
+                            verticalAlignment = Alignment.CenterVertically,
                         ) {
                             Row(
-                                modifier = Modifier.padding(
+                                modifier =
+                                Modifier.padding(
                                     vertical = 6.dp,
-                                    horizontal = 8.dp
-                                )
+                                    horizontal = 8.dp,
+                                ),
                             ) {
                                 Box(
-                                    modifier = Modifier
+                                    modifier =
+                                    Modifier
                                         .clip(CircleShape)
                                         .border(
                                             width = 1.dp,
                                             colorResource(R.color.light_gray),
-                                            shape = CircleShape
+                                            shape = CircleShape,
                                         ).clickable(
                                             onClick = {
                                                 detailViewModel.removeQty()
-                                            }
-                                        )
+                                            },
+                                        ),
                                 ) {
                                     Icon(
                                         imageVector = Icons.Default.Remove,
                                         contentDescription = "Remove",
-                                        modifier = Modifier.padding(1.dp)
+                                        modifier = Modifier.padding(1.dp),
                                     )
                                 }
 
@@ -223,28 +232,31 @@ fun DishDetailsScreen(
                                     fontFamily = FontFamily.SansSerif,
                                     fontWeight = FontWeight.Bold,
                                     fontSize = dimensionResource(R.dimen.medium_large).value.sp,
-                                    modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.medium_large))
+                                    modifier = Modifier.padding(
+                                        horizontal = dimensionResource(R.dimen.medium_large),
+                                    ),
                                 )
 
                                 Box(
-                                    modifier = Modifier
+                                    modifier =
+                                    Modifier
                                         .clip(CircleShape)
                                         .background(colorResource(R.color.green))
                                         .border(
                                             width = 1.dp,
                                             colorResource(R.color.green),
-                                            shape = CircleShape
+                                            shape = CircleShape,
                                         ).clickable(
                                             onClick = {
                                                 detailViewModel.addQty()
-                                            }
-                                        )
+                                            },
+                                        ),
                                 ) {
                                     Icon(
                                         imageVector = Icons.Default.Add,
                                         contentDescription = "Remove",
                                         modifier = Modifier.padding(1.dp),
-                                        tint = colorResource(R.color.white)
+                                        tint = colorResource(R.color.white),
                                     )
                                 }
                             }
@@ -263,20 +275,22 @@ fun DishDetailsScreen(
 
                     addons.forEach { addOn ->
                         Box(
-                            modifier = Modifier
+                            modifier =
+                            Modifier
                                 .fillMaxWidth()
                                 .padding(top = dimensionResource(R.dimen.small))
                                 .border(
                                     1.dp,
                                     colorResource(R.color.light_gray),
-                                    RoundedCornerShape(dimensionResource(R.dimen.small))
-                                )
+                                    RoundedCornerShape(dimensionResource(R.dimen.small)),
+                                ),
                         ) {
                             Row(
-                                modifier = Modifier
+                                modifier =
+                                Modifier
                                     .fillMaxWidth()
                                     .padding(
-                                        end = dimensionResource(R.dimen.small)
+                                        end = dimensionResource(R.dimen.small),
                                     ),
                                 horizontalArrangement = Arrangement.SpaceBetween,
                                 verticalAlignment = Alignment.CenterVertically,
@@ -289,16 +303,17 @@ fun DishDetailsScreen(
                                         onCheckedChange = { checked ->
                                             detailViewModel.updateAddOns(addOn, checked)
                                         },
-                                        colors = CheckboxDefaults.colors(
+                                        colors =
+                                        CheckboxDefaults.colors(
                                             uncheckedColor = colorResource(R.color.gray),
                                             checkedColor = colorResource(R.color.green),
-                                            checkmarkColor = colorResource(R.color.yellow)
-                                        )
+                                            checkmarkColor = colorResource(R.color.yellow),
+                                        ),
                                     )
 
                                     Text(
                                         text = addOn.name,
-                                        fontFamily = FontFamily.SansSerif
+                                        fontFamily = FontFamily.SansSerif,
                                     )
                                 }
 
@@ -315,31 +330,33 @@ fun DishDetailsScreen(
                 }
             }
             is UiState.Error -> {
-
             }
         }
 
         Button(
             onClick = {
-                detailViewModel.addToCart() {
+                detailViewModel.addToCart {
                     onAddToCartClicked()
                 }
             },
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxWidth()
                 .padding(dimensionResource(R.dimen.medium_large)),
             contentPadding = PaddingValues(dimensionResource(R.dimen.small)),
             shape = RoundedCornerShape(dimensionResource(R.dimen.very_small)),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = colorResource(R.color.green)
-            )
+            colors =
+            ButtonDefaults.buttonColors(
+                containerColor = colorResource(R.color.green),
+            ),
         ) {
             Text(
-                text = "Add to Cart - $" +
-                        String.format(Locale.getDefault(), "%.2f", totalAmount),
+                text =
+                "Add to Cart - $" +
+                    String.format(Locale.getDefault(), "%.2f", totalAmount),
                 fontSize = dimensionResource(R.dimen.medium).value.sp,
                 color = colorResource(R.color.yellow),
-                fontFamily = FontFamily.SansSerif
+                fontFamily = FontFamily.SansSerif,
             )
         }
     }

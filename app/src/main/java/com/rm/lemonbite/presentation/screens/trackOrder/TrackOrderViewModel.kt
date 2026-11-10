@@ -6,16 +6,16 @@ import com.rm.lemonbite.data.mapper.toDomain
 import com.rm.lemonbite.domain.models.OrderDetails
 import com.rm.lemonbite.domain.repository.OrderRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
-class TrackOrderViewModel @Inject constructor(
-    private val orderRepository: OrderRepository
-) : ViewModel() {
-
+class TrackOrderViewModel
+@Inject
+constructor(private val orderRepository: OrderRepository) :
+    ViewModel() {
     private val _orderList = MutableStateFlow<List<OrderDetails>>(emptyList())
     val orderList = _orderList.asStateFlow()
 

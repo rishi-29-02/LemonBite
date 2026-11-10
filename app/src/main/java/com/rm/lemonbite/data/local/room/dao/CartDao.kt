@@ -8,7 +8,6 @@ import com.rm.lemonbite.data.local.room.model.CartEntity
 
 @Dao
 interface CartDao {
-
     @Query("SELECT * FROM CartEntity LIMIT 1")
     suspend fun getCart(): CartEntity?
 
