@@ -1,3 +1,4 @@
+import dev.detekt.gradle.Detekt
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 plugins {
@@ -8,6 +9,7 @@ plugins {
     alias(libs.plugins.ksp)
     id("com.google.gms.google-services")
     alias(libs.plugins.ktlint)
+    alias(libs.plugins.detekt)
 }
 
 android {
@@ -112,5 +114,34 @@ ktlint {
     filter {
         exclude("**/generated/**")
         exclude("**/BuildConfig.*")
+    }
+}
+
+detekt {
+    toolVersion = libs.versions.detekt.get()
+
+    config.setFrom(files("$projectDir/../detekt-config.yml"))
+
+    allRules = false
+    ignoreFailures = false
+    buildUponDefaultConfig = true
+}
+
+tasks.withType<Detekt>().configureEach {
+
+    exclude(
+        "**/generated/**",
+        "**/BuildConfig.*",
+        "**/R.java",
+        "**/Manifest.java"
+    )
+
+    include(
+        "**/*.kt",
+        "**/*.kts"
+    )
+
+    reports {
+        html.required.set(true)
     }
 }
