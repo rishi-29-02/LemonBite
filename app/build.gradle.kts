@@ -7,9 +7,13 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
-    id("com.google.gms.google-services")
+    alias(libs.plugins.google.services)
     alias(libs.plugins.ktlint)
     alias(libs.plugins.detekt)
+}
+
+dependencyLocking {
+    lockAllConfigurations()
 }
 
 android {
@@ -71,15 +75,15 @@ dependencies {
     implementation(libs.androidx.datastore.preferences)
 
     // Import the Firebase BoM
-    implementation(platform("com.google.firebase:firebase-bom:34.19.0"))
+    implementation(platform(libs.firebase.bom))
 
     // When using the BoM, don't specify versions in Firebase dependencies
-    implementation("com.google.firebase:firebase-analytics")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.8.1")
-    implementation("com.google.firebase:firebase-firestore")
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.firestore)
+    implementation(libs.kotlinx.coroutines.play.services)
 
     // Coil
-    implementation("io.coil-kt:coil-compose:2.7.0")
+    implementation(libs.coil.compose)
 
     // Room
     implementation(libs.androidx.room.runtime)
