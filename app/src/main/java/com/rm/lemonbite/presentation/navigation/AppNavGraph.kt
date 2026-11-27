@@ -6,7 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.rm.lemonbite.domain.StartState
-import com.rm.lemonbite.presentation.screens.ProfileScreen
+import com.rm.lemonbite.presentation.screens.profile.ProfileScreen
 import com.rm.lemonbite.presentation.screens.WelcomeScreen
 import com.rm.lemonbite.presentation.screens.dishDetailScreen.DishDetailsScreen
 import com.rm.lemonbite.presentation.screens.home.HomeScreen

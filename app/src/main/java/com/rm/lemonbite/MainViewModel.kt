@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.stateIn
 class MainViewModel
 @Inject
 constructor(
-    private val userPreferencesRepository: UserPreferencesRepository,
+    userPreferencesRepository: UserPreferencesRepository,
 ) : ViewModel() {
     val startState: StateFlow<StartState> =
         userPreferencesRepository.onBoardingCompleted

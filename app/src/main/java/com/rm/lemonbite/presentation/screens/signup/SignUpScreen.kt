@@ -109,8 +109,8 @@ fun SignUpScreen(
                 }
 
                 CustomOutlinedTextField(
-                    headline = "First Name",
-                    placeholder = "Enter First Name",
+                    headline = "Name",
+                    placeholder = "Enter Your Name",
                     enable = true,
                     value = name,
                     onValueChanged = { signUpViewModel.updateFirstName(it) },
@@ -120,7 +120,7 @@ fun SignUpScreen(
 
                 CustomOutlinedTextField(
                     headline = "Email",
-                    placeholder = "Ex. rakesh09@gmail.com",
+                    placeholder = "Enter Your Email",
                     enable = true,
                     value = email,
                     onValueChanged = { signUpViewModel.updateEmail(it) },

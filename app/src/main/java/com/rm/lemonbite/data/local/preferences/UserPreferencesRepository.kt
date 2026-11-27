@@ -20,12 +20,14 @@ constructor(
     private val dataStore: DataStore<Preferences>,
 ) {
     companion object {
-        val USER_FIRST_NAME = stringPreferencesKey("user_first_name")
+        val USERNAME = stringPreferencesKey("user_name")
         val USER_EMAIL = stringPreferencesKey("user_email")
-
         val ONBOARDING_COMPLETED = booleanPreferencesKey("onboarding_completed")
-
         val COURSE_PREFS = stringSetPreferencesKey("course_prefs")
+        val EMAIL_ORDER_STATUS = booleanPreferencesKey("email_order_prefs")
+        val EMAIL_NEWSLETTER = booleanPreferencesKey("email_newsletter")
+        val EMAIL_PASSWORD_CHANGES = booleanPreferencesKey("email_password_changes")
+        val EMAIL_SPECIAL_OFFERS = booleanPreferencesKey("email_special_offers")
     }
 
     val preferences: Flow<Preferences> =
@@ -39,7 +41,7 @@ constructor(
 
     val userName: Flow<String> =
         preferences.map { prefs ->
-            prefs[USER_FIRST_NAME] ?: ""
+            prefs[USERNAME] ?: ""
         }
 
     val userEmail: Flow<String> =
@@ -57,9 +59,29 @@ constructor(
             prefs[COURSE_PREFS] ?: emptySet()
         }
 
+    val emailOrderStatus : Flow<Boolean> =
+        preferences.map { prefs ->
+            prefs[EMAIL_ORDER_STATUS] ?: false
+        }
+
+    val emailNewsLetter : Flow<Boolean> =
+        preferences.map { prefs ->
+            prefs[EMAIL_NEWSLETTER] ?: false
+        }
+
+    val emailPasswordChanges : Flow<Boolean> =
+        preferences.map { prefs ->
+            prefs[EMAIL_PASSWORD_CHANGES] ?: false
+        }
+
+    val emailSpecialOffers : Flow<Boolean> =
+        preferences.map { prefs ->
+            prefs[EMAIL_SPECIAL_OFFERS] ?: false
+        }
+
     suspend fun saveUserData(firstName: String, email: String) {
         dataStore.edit { preferences ->
-            preferences[USER_FIRST_NAME] = firstName
+            preferences[USERNAME] = firstName
             preferences[USER_EMAIL] = email
         }
     }
@@ -73,6 +95,30 @@ constructor(
     suspend fun setPrefs(prefs: Set<String>) {
         dataStore.edit { preferences ->
             preferences[COURSE_PREFS] = prefs
+        }
+    }
+
+    suspend fun saveEmailOrderStatus(save: Boolean) {
+        dataStore.edit { preferences ->
+            preferences[EMAIL_ORDER_STATUS] = save
+        }
+    }
+
+    suspend fun saveEMAILEmailNewsLetter(save: Boolean) {
+        dataStore.edit { preferences ->
+            preferences[EMAIL_NEWSLETTER] = save
+        }
+    }
+
+    suspend fun saveEmailPasswordChanges(save: Boolean) {
+        dataStore.edit { preferences ->
+            preferences[EMAIL_PASSWORD_CHANGES] = save
+        }
+    }
+
+    suspend fun saveEmailSpecialOffers(save: Boolean) {
+        dataStore.edit { preferences ->
+            preferences[EMAIL_SPECIAL_OFFERS] = save
         }
     }
 }
