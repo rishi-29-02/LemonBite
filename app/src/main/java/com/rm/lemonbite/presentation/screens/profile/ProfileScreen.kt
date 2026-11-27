@@ -1,4 +1,4 @@
-package com.rm.lemonbite.presentation.screens
+package com.rm.lemonbite.presentation.screens.profile
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -34,6 +34,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.rm.lemonbite.R
 import com.rm.lemonbite.presentation.customComponents.CustomOutlinedTextField
 import com.rm.lemonbite.presentation.customComponents.TopMenuBar
@@ -43,7 +45,11 @@ fun ProfileScreen(
     modifier: Modifier = Modifier,
     navigateToCartScreen: () -> Unit,
     onBackClick: () -> Unit,
+    profileScreenViewModel: ProfileScreenViewModel = hiltViewModel()
 ) {
+    val userName = profileScreenViewModel.userName.collectAsStateWithLifecycle().value
+    val email = profileScreenViewModel.email.collectAsStateWithLifecycle().value
+
     Column(
         modifier =
         modifier
@@ -99,7 +105,7 @@ fun ProfileScreen(
                         .padding(dimensionResource(R.dimen.large)),
                 ) {
                     Text(
-                        text = "AV",
+                        text = if (userName.isNotEmpty()) userName.substring(0, 2).uppercase() else "AV",
                         fontFamily = FontFamily.SansSerif,
                         color = colorResource(R.color.white),
                         fontWeight = FontWeight.Bold,
@@ -161,20 +167,10 @@ fun ProfileScreen(
             Spacer(modifier = Modifier.padding(vertical = dimensionResource(R.dimen.small)))
 
             CustomOutlinedTextField(
-                headline = "First Name",
+                headline = " User",
                 placeholder = "",
                 enable = false,
-                value = "Test",
-                onValueChanged = { },
-            )
-
-            Spacer(modifier = Modifier.padding(vertical = dimensionResource(R.dimen.very_small)))
-
-            CustomOutlinedTextField(
-                headline = "Last Name",
-                placeholder = "",
-                enable = false,
-                value = "User",
+                value = userName,
                 onValueChanged = { },
             )
 
@@ -184,7 +180,7 @@ fun ProfileScreen(
                 headline = "Email",
                 placeholder = "",
                 enable = false,
-                value = "rakesh09@gmail.com",
+                value = email,
                 onValueChanged = { },
             )
 
