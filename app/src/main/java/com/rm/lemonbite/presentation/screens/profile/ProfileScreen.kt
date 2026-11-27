@@ -23,8 +23,6 @@ import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateMapOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -39,6 +37,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.rm.lemonbite.R
 import com.rm.lemonbite.presentation.customComponents.CustomOutlinedTextField
 import com.rm.lemonbite.presentation.customComponents.TopMenuBar
+import com.rm.lemonbite.presentation.utils.NotificationType
 
 @Composable
 fun ProfileScreen(
@@ -49,6 +48,7 @@ fun ProfileScreen(
 ) {
     val userName = profileScreenViewModel.userName.collectAsStateWithLifecycle().value
     val email = profileScreenViewModel.email.collectAsStateWithLifecycle().value
+    val notificationList = profileScreenViewModel.notificationList.collectAsStateWithLifecycle().value
 
     Column(
         modifier =
@@ -71,7 +71,8 @@ fun ProfileScreen(
                 .weight(1f)
                 .padding(
                     horizontal = dimensionResource(R.dimen.medium),
-                ).verticalScroll(rememberScrollState()),
+                )
+                .verticalScroll(rememberScrollState()),
         ) {
             Text(
                 text = "Personal Information",
@@ -203,16 +204,6 @@ fun ProfileScreen(
                 fontSize = dimensionResource(R.dimen.medium_large).value.sp,
             )
 
-            val notificationsList =
-                remember {
-                    mutableStateMapOf(
-                        "Order Status" to false,
-                        "Password Changes" to false,
-                        "Special Offers" to false,
-                        "Newsletter" to false,
-                    )
-                }
-
             Column(
                 modifier =
                 Modifier
@@ -221,22 +212,25 @@ fun ProfileScreen(
                         RoundedCornerShape(
                             dimensionResource(R.dimen.small),
                         ),
-                    ).border(
+                    )
+                    .border(
                         width = 1.dp,
                         color = colorResource(R.color.light_gray),
                         shape = RoundedCornerShape(dimensionResource(R.dimen.small)),
                     ),
             ) {
-                notificationsList.forEach { (notification, checked) ->
+                notificationList.forEach { notificationStatus ->
                     Column {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
                             Checkbox(
-                                checked = checked,
+                                checked = notificationStatus.status,
                                 onCheckedChange = {
-                                    notificationsList[notification] = !checked
+                                    profileScreenViewModel.onCheckChange(
+                                        notificationStatus.copy(status = it),
+                                    )
                                 },
                                 colors =
                                 CheckboxDefaults.colors(
@@ -247,7 +241,12 @@ fun ProfileScreen(
                             )
 
                             Text(
-                                text = notification,
+                                text = when (notificationStatus.notificationType) {
+                                    NotificationType.ORDER_STATUS -> "Order Status"
+                                    NotificationType.PASSWORD_CHANGES -> "Password Changes"
+                                    NotificationType.SPECIAL_OFFERS -> "Special Offers"
+                                    NotificationType.NEWSLETTER -> "Newsletter"
+                                },
                             )
                         }
 

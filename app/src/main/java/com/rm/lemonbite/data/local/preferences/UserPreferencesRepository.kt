@@ -104,7 +104,7 @@ constructor(
         }
     }
 
-    suspend fun saveEMAILEmailNewsLetter(save: Boolean) {
+    suspend fun saveEmailNewsLetterStatus(save: Boolean) {
         dataStore.edit { preferences ->
             preferences[EMAIL_NEWSLETTER] = save
         }
